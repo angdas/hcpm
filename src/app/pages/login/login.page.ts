@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { StorageService } from 'src/app/providers/storageService/storage.service';
 import { ParameterService } from 'src/app/providers/parameterService/parameter.service';
 import { DataService } from 'src/app/providers/dataService/data.service';
+import { EmployeeModel } from 'src/app/models/worker/worker.interface';
 
 @Component({
   selector: 'app-login',
@@ -62,12 +63,19 @@ export class LoginPage implements OnInit {
     })
   }
   getWorkerDetails() {
-    this.axservice.getWorkerDetails(this.paramService.email).subscribe(res => {
+    this.axservice.getWorkerDetails(this.paramService.email).subscribe((res:EmployeeModel) => {
       console.log(res);
-      this.dataService.setMyDetails(res);
-      this.storageServ.setUserDetails(res);
-
-      this.isManager(res.IsManager);
+      if(!res.Name){
+        this.storageServ.setAuthenticated(false);
+        this.errorToast("Worker not found");
+        this.events.publish('loggedOut');
+      }else{
+        this.dataService.setMyDetails(res);
+        this.storageServ.setUserDetails(res);
+  
+        this.isManager(res.IsManager);
+      }
+    
     }, (error) => {
     
     })
