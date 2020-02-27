@@ -1,0 +1,7 @@
+{
+  "name": "hcpm",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
