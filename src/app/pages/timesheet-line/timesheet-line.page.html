@@ -1,0 +1,75 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Timesheet Line</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <button class="submitBtn" (click)="saveTimesheet()" [disabled]="!isEditable">
+                <ion-icon name="save"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div style="margin: 16px 0px;">
+
+        <ion-item>
+            <ion-label position="floating">Project</ion-label>
+            <ion-select okText="Okay" cancelText="Dismiss" interface="action-sheet" [(ngModel)]="tsLine.ProjId"
+                (ionChange)="projSelected($event)">
+                <ion-select-option *ngFor="let project of tsProject" [value]="project.ProjId">
+                    {{project.ProjDescription}}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <!-- <ion-item>
+            <ion-label position="floating">Category</ion-label>
+            <ion-select value="brown" okText="Okay" cancelText="Dismiss" interface="action-sheet">
+                <ion-select-option value="brown">Brown</ion-select-option>
+            </ion-select>
+        </ion-item> -->
+
+        <ion-item>
+            <ion-label position="floating">Activity</ion-label>
+            <ion-select okText="Okay" cancelText="Dismiss" interface="action-sheet" [(ngModel)]="tsLine.ProjActivityId">
+                <ion-select-option *ngFor="let activity of tsActivity" [value]="activity.ProjActivityId">
+                    {{activity.ProjActivityDescription}}
+                </ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <table style="margin-top: 16px;">
+            <tr>
+                <th *ngFor="let day of timesheetPeriodList"> {{day.PeriodDate | date:'EEE dd/LL'}} </th>
+            </tr>
+            <tr>
+                <!-- *ngIf="dateLine.Hours>0" -->
+                <td (click)="openComment($event,tsLine.Hours1,tsLine.InternalComment1,tsLine.ExternalComment1,1)">
+                    <ion-badge color="primary" *ngIf="tsLine.Hours1>0"> {{tsLine.Hours1}} </ion-badge>
+                </td>
+                <td (click)="openComment($event,tsLine.Hours2,tsLine.InternalComment2,tsLine.ExternalComment2,2)">
+                    <ion-badge color="primary" *ngIf="tsLine.Hours2>0"> {{tsLine.Hours2}} </ion-badge>
+                </td>
+                <td (click)="openComment($event,tsLine.Hours3,tsLine.InternalComment3,tsLine.ExternalComment3,3)">
+                    <ion-badge color="primary" *ngIf="tsLine.Hours3>0"> {{tsLine.Hours3}} </ion-badge>
+                </td>
+                <td (click)="openComment($event,tsLine.Hours4,tsLine.InternalComment4,tsLine.ExternalComment4,4)">
+                    <ion-badge color="primary" *ngIf="tsLine.Hours4>0"> {{tsLine.Hours4}} </ion-badge>
+                </td>
+                <td (click)="openComment($event,tsLine.Hours5,tsLine.InternalComment5,tsLine.ExternalComment5,5)">
+                    <ion-badge color="primary" *ngIf="tsLine.Hours5>0"> {{tsLine.Hours5}} </ion-badge>
+                </td>
+                <td (click)="openComment($event,tsLine.Hours6,tsLine.InternalComment6,tsLine.ExternalComment6,6)">
+                    <ion-badge color="primary" *ngIf="tsLine.Hours6>0"> {{tsLine.Hours6}} </ion-badge>
+                </td>
+                <td (click)="openComment($event,tsLine.Hours7,tsLine.InternalComment7,tsLine.ExternalComment7,7)">
+                    <ion-badge color="primary" *ngIf="tsLine.Hours7>0"> {{tsLine.Hours7}} </ion-badge>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+</ion-content>

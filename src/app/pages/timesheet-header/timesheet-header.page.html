@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Timesheet Line</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <button class="addBtn" (click)="addTimesheetLine()" [disabled]="!isEditable">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <table class="margin-top margin-bottom">
+    <tr>
+      <th *ngFor="let day of timesheetPeriodList"> {{day.PeriodDate | date:'EEE dd/LL'}} </th>
+    </tr>
+    <tr>
+      <ng-container *ngFor="let period of timesheetPeriodList;let k = index">
+        <td>
+          <ng-container *ngFor="let days of timesheetApp.TimesheetLine;let i = index">
+            <ion-badge [ngStyle]="{'background':colorList[i].bgColor }" *ngIf="days[getLineHrs(k)] > 0">
+              {{days[getLineHrs(k)]}}
+            </ion-badge>
+          </ng-container>
+        </td>
+      </ng-container>
+    </tr>
+  </table>
+
+  <ion-list *ngFor="let tsLine of timesheetApp.TimesheetLine,let i=index">
+    <div *ngIf="!tsLine.IsDeleted">
+      <div (click)="editProjectDetails(tsLine)">
+        <div class="projDetail"
+          [ngStyle]="{'border-left-style': 'solid','border-left-width' : '15px','border-left-color':colorList[i].bgColor }">
+          <p><b>Project : {{tsLine.ProjDescription}}</b></p>
+
+          <p style="margin-top:8px;">Total Hours : {{getHrs(tsLine)}}</p>
+          <p style="margin-top:8px;">Activity : {{tsLine.ProjActivityDescription}}</p>
+        </div>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

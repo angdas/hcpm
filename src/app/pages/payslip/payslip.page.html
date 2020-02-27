@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Payslip</ion-title>
+    <ion-buttons slot="start" *ngIf="pageType=='manager';else emp">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ng-template #emp>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ng-template>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Select Month</ion-label>
+    <ion-datetime displayFormat="MMMM YYYY" [(ngModel)]="selectedMonth" (ionChange)="monthValueChanged()"></ion-datetime>
+  </ion-item>
+
+  <div *ngIf="payslip.length ; else noPayroll">
+    
+      <ion-item (click)="downloadPayslip()" lines="none">
+        <ion-label><u>Download as PDF</u></ion-label>
+      </ion-item>
+    
+  </div>
+  <ng-template #noPayroll>
+    <div class="noData">
+      No payroll for this period
+    </div>
+  </ng-template>
+</ion-content>

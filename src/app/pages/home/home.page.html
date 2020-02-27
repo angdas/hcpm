@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" *ngIf="pageType!='manager'">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start" *ngIf="pageType=='manager'">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!authenticated && pageType!='manager';else user">
+  </div>
+  <ng-template #user>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+
+    <div class="userCard" *ngIf="pageType!='manager'">
+      <img [src]="getImageStr()">
+      <p>{{emp.Name}}</p>
+    </div>
+
+    <ion-item detail="true" (click)="presentModal('Personal Details')">
+      <ion-label>Personal Details</ion-label>
+    </ion-item>
+
+    <ion-item detail="true" (click)="presentModal('Job Details')">
+      <ion-label>Job Details</ion-label>
+    </ion-item>
+
+    <ion-item detail="true" (click)="presentModal('Document Details')">
+      <ion-label>Document Details</ion-label>
+    </ion-item>
+    
+    <ion-item detail="true" (click)="presentModal('Leave Balance')">
+      <ion-label>Leave Balance</ion-label>
+    </ion-item>
+
+
+  </ng-template>
+</ion-content>

@@ -1,0 +1,32 @@
+.welcome-card img {
+    max-height: 30vh;
+    overflow: hidden;
+  }
+  .userCard{
+    height: auto;
+    text-align: center;
+    
+    padding: 20px;
+    margin: 0px;
+    color: var(--ion-color-primary-contrast);
+    background: 
+    linear-gradient(
+      rgba(0, 255, 231, 0.54),
+      rgba(0,0,0,.7)
+    ),
+    url(https://media.freestocktextures.com/cache/97/de/97de8a4d00fd34c0ca54fd938c08096d.jpg);
+    background-repeat: no-repeat;
+  }
+  img{
+    border-radius: 500px;
+      height: 180px;
+      width: 180px;
+  }
+
+
+  .appVersion{
+      bottom: 0;
+      left: 16px;
+      font-size: 14px;
+      color: grey;
+  }

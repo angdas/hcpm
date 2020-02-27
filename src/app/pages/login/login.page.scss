@@ -1,0 +1,30 @@
+ion-item,ion-button{
+    margin-top: 16px;
+}
+.text-center{
+    text-align: center;;
+}
+.loginCard{
+    padding: 16px;
+}
+
+.headerIcon{
+    height: 100px;
+    width: 100px;
+}
+.showPass{
+    color: grey;
+}
+.offPass{
+    color: var(--ion-color-primary);
+}
+.logo{
+    height: 100px;
+    width: auto;
+}
+
+.savePassword{
+    margin: 0px;
+    font-size: 14px;
+    padding: 0px;
+}
