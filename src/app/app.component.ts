@@ -78,7 +78,7 @@ export class AppComponent {
     this.storageService.setAuthenticated(false);
     this.storageService.setEmail("");
     this.storageService.setIsManager(false);
-    this.menuCtrl.enable(true); 
+    this.menuCtrl.enable(false); 
     this.router.navigateByUrl("/login");
 
 
