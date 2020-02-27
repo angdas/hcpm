@@ -18,7 +18,14 @@ import { DataService } from './providers/dataService/data.service';
 })
 export class AppComponent {
   backButtonSubscription:any;
-  public appPages = [ ];
+  public appPages = [
+    { title: 'Home', url: '/home', icon: 'home' },
+    { title: 'Timesheet', url: '/timesheet-home', icon: 'time' },
+    { title: 'Leave', url: '/leave-home', icon: 'briefcase' },
+    { title: 'Payslip', url: '/payslip', icon: 'wallet' },
+    { title: 'HR Request', url: '/document-request', icon: 'apps' },
+    { title: 'Logout', url: '', icon: 'power' }
+   ];
   authenticated: boolean = false;
   emp: EmployeeModel = {} as EmployeeModel;
   
@@ -30,6 +37,15 @@ export class AppComponent {
   ) {
     this.initializeApp(); 
     this.initializeStorageVariables();
+
+    this.events.subscribe('loggedOut', () => {
+      this.authenticated = false;
+      this.menuCtrl.enable(false);
+    })
+    this.events.subscribe('loggedin', () => {
+      this.authenticated = true;
+      this.menuCtrl.enable(true);
+    });
     
   }
   initializeApp() {
@@ -43,23 +59,10 @@ export class AppComponent {
     this.events.subscribe('loggedOut', () => {
       this.authenticated = false;
       this.menuCtrl.enable(false);
-      this.appPages = [
-        { title: 'Login', url: '', icon: 'home' },
-        // { title: 'Settings', url: '/settings', icon: 'settings' },
-      ];
     })
     this.events.subscribe('loggedin', () => {
       this.authenticated = true;
       this.menuCtrl.enable(true);
-      this.appPages = [
-        { title: 'Home', url: '/home', icon: 'home' },
-        { title: 'Timesheet', url: '/timesheet-home', icon: 'time' },
-        { title: 'Leave', url: '/leave-home', icon: 'briefcase' },
-        { title: 'Payslip', url: '/payslip', icon: 'wallet' },
-        { title: 'HR Request', url: '/document-request', icon: 'apps' },
-        { title: 'Logout', url: '', icon: 'power' },
-        // { title: 'Settings', url: '/settings', icon: 'settings' }
-      ];
     });
   }
 
